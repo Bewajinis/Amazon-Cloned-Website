@@ -124,14 +124,15 @@ export function renderOrderSummary() {
   .forEach((link) => {
     link.addEventListener('click', () => {
       const productId = link.dataset.productId;
-      console.log(productId);
-
-
       removeFromCart(productId);
       
-      const container = document.querySelector(`.js-cart-item-container-${productId}`);
+      const container = document.querySelector(`.js-cart-item-container-${productId}`
+
+      );
       
       container.remove();
+
+      renderPaymentSummary();
     });
   });
 
