@@ -62,6 +62,7 @@ export function getProduct(productId) {
 const date = new Date();
 date.toLocaleTimeString();
 
+export let products = [];
 
 export function loadProductsFetch() {
   const promise = fetch(
@@ -80,7 +81,7 @@ export function loadProductsFetch() {
   console.log('Unexpected error. Try again later.');
 });
 
-  return promise
+  return promise;
 }
 
 // loadProductsFetch().then(() => {
@@ -92,7 +93,6 @@ export function loadProductsFetch() {
 
 
 
-export let products = [];
 
 
 export function loadProducts(fun) {

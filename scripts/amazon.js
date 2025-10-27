@@ -3,7 +3,7 @@ import { products, loadProducts, loadProductsFetch } from "../data/products.js";
 import { formatCurrency } from "./utils/money.js"; 
 
 
-loadProductsFetch(renderProductsGrid);
+loadProducts(renderProductsGrid);
 
 
 function renderProductsGrid() {
