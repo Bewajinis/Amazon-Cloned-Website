@@ -62,29 +62,63 @@ export function getProduct(productId) {
 const date = new Date();
 date.toLocaleTimeString();
 
-export let product = [];
+
+export function loadProductsFetch() {
+  const promise = fetch(
+    'https://supersimplebackend.dev/products'
+  ).then((response) => {
+    return response.json();
+  }).then((productsData) => {
+    products = productsData.map((productDetails)=> {
+    if (productDetails.type === 'clothing') {
+      return new Clothing(productDetails); 
+    }
+    return new Product(productDetails);
+    });
+    console.log('load products');
+  }).catch((error) => {
+  console.log('Unexpected error. Try again later.');
+});
+
+  return promise
+}
+
+// loadProductsFetch().then(() => {
+
+// });
+
+
+
+
+
+
+export let products = [];
 
 
 export function loadProducts(fun) {
   const xhr = new XMLHttpRequest();
   
   xhr.addEventListener('load',() => {
-    product = JSON.parse(xhr.response).map((productDetails)=> {
-    if (productDetails.type === 'clothing') {
-      return new Clothing(productDetails); 
-    }
-    return new Product(productDetails);
-  });
+    products = JSON.parse(xhr.response).map((productDetails) => {
+      if (productDetails.type === 'clothing') {
+        return new Clothing(productDetails); 
+      }
+      return new Product(productDetails);
+    });
+
     fun();
-
   });
 
+  xhr.addEventListener('error', (error) => {
+    console.log('Unexpected error. Try again later.');
+  });
 
   xhr.open('GET', 'https://supersimplebackend.dev/products');
   xhr.send();
+
 }
 
-loadProducts();
+
 
 // export const products = [
 //   {
