@@ -59,6 +59,9 @@ export function getProduct(productId) {
   return matchingProduct;
 }
 
+const date = new Date();
+date.toLocaleTimeString();
+
 
 export const products = [
   {
